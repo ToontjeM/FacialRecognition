@@ -53,7 +53,7 @@ def create_db_connection():
     return psycopg2.connect(
         dbname="postgres",
         user="postgres",
-        password="admin",
+        password="postgres",
         host="localhost"
     )
 
@@ -71,7 +71,7 @@ def run_queries(bytes_data):
         start_time = time.time()
         query = """
         SELECT id, imagepath, 1 - (embeddings <=> %s) as similarity
-        FROM pictures_2
+        FROM pictures
         ORDER BY (embeddings <=> %s)
         LIMIT 5;
         """
@@ -103,7 +103,7 @@ if 'db_conn' not in st.session_state or st.session_state.db_conn.closed:
 
 
 def capture_webcam():
-    cap = cv2.VideoCapture(-0)
+    cap = cv2.VideoCapture(1)
 
     # Set capture resolution (example: 640x480)
     # Note: Make sure your webcam supports the resolution you set here
@@ -115,7 +115,7 @@ def capture_webcam():
         st.error("Failed to grab frame from webcam.")
         cap.release()
         return None
-  cap.release()
+    cap.release()
     # Convert the color from BGR to RGB
     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 

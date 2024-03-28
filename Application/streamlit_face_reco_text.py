@@ -48,7 +48,7 @@ def create_db_connection():
     return psycopg2.connect(
         dbname="postgres",
         user="postgres",
-        password="admin",
+        password="postgres",
         host="localhost"
     )
 
@@ -66,7 +66,7 @@ def search_images(text_query):
         start_time = time.time()
         query = """
         SELECT id, imagepath, 1 - (embeddings <=> %s) as similarity
-        FROM pictures_2
+        FROM pictures
         ORDER BY (embeddings <=> %s)
         LIMIT 5;
         """
@@ -114,7 +114,7 @@ def run_queries(bytes_data):
         start_time = time.time()
         query = """
         SELECT id, imagepath, 1 - (embeddings <=> %s) as similarity
-        FROM pictures_2
+        FROM pictures
         ORDER BY (embeddings <=> %s) 
         LIMIT 5;
         """
