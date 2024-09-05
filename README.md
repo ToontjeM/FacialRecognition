@@ -50,6 +50,8 @@ base-executable = /Library/edb/languagepack/v4/Python-3.11/bin/python3.11
 
 * Install pgvector 0.6 extension from https://github.com/pgvector/pgvector
 
+* Create the plpython3u extension using `create extension plpython3u;`
+
 * Validate that pl-python3u is working well.
   * Create a test function like:
 ```ps
