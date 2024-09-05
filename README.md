@@ -135,7 +135,7 @@ select public.scan_specific_path_and_load('/Users/ton.machielsen/AI/FacialRecogn
 ```
 
 > [!NOTE]
-> I ran into an issue where the pythin script could not find my images and threw a `Permission denied` error. 
+> I ran into an issue where the python script could not find my images and threw a `Permission denied` error. 
 > ```
 > postgres=# select process_images_and_store_embeddings_batch('/Users/ton.machielsen/AI/FacialRecognition/dataset/image_group_1','person',32);
 > ERROR:  PermissionError: [Errno 13] Permission denied: '/Users/ton.machielsen/AI/FacialRecognition/dataset/image_group_1'
@@ -144,7 +144,7 @@ select public.scan_specific_path_and_load('/Users/ton.machielsen/AI/FacialRecogn
 >     image_paths = [os.path.join(source_dir, f) for f in os.listdir(source_dir) if os.path.isfile(os.path.join(source_dir, f))]
 > PL/Python function "process_images_and_store_embeddings_batch"
 > ```
-> This is because i ran the applicatoin from my home directory and the `PostgreSQL` user created during installation of PostgreSQL doesn't have access to my home directory. If this happens to you, fix it by giving the user > PostgreSQL access to the directory where the dataset is stored.
+> This is because i ran the applicatoin from my home directory and the `PostgreSQL` user created during installation of PostgreSQL doesn't have access to my home directory. If this happens to you, fix it by giving the user > `PostgreSQL` access to the directory where the dataset is stored.
 
 ## Similarity Search using sample python program
 
