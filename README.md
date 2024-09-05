@@ -8,6 +8,8 @@ We are showing also text to image search, searching on images content passing te
 
 ## Demo prep
 ### Install environment
+* This manual assumes that you **DON'T** have PostgreSQL installed using Homebrew. If you do, either uninstall the Homebrew version of PostgreSQL or look for other ways to install `pgvector` and `plpython3u`.
+
 * Install PostgreSQL. On Mac, make sure you install from the [graphical installer](https://www.enterprisedb.com/postgres-tutorials/installation-postgresql-mac-os) and you install Stack Builder as well.
 
 ![Postgres graphical installer](images/PostgresInstaller.png "Postgres graphical installer")
@@ -48,9 +50,11 @@ base-executable = /Library/edb/languagepack/v4/Python-3.11/bin/python3.11
 
 *Dirtiest hack ever:* If you have issues with Postgres not finding your modules and you have no idea how to figure this out, just copy your python3.11(!) site-packages directly to `/Library/edb/languagepack/v4/Python-3.11/lib/python3.11/site-packages` and change the ownership to `root:daemon`. Then `select py_list_packages();` will show you all packages. As soon as i find a more "legal" way to do this i will update this README.
 
-* Install pgvector 0.6 extension from https://github.com/pgvector/pgvector
+* Install pgvector extension from https://github.com/pgvector/pgvector using the `git clone / make / make install` method.
 
-* Create the plpython3u extension using `create extension plpython3u;`
+* Create the pgvector extension using `CREATE EXTENSION vector;`
+
+* Create the plpython3u extension using `CREATE EXTENSION plpython3u;`
 
 * Validate that pl-python3u is working well.
   * Create a test function like:
