@@ -32,7 +32,17 @@ Installation Log: /tmp/install-postgresql.log
 * Create a virtual environment using the python version that comes with the EDB Language Pack like this: 
 ```
 virtualenv --python="/Library/edb/languagepack/v4/Python-3.11/bin/python" venv
-source venv/bin/acivate
+source venv/bin/activate
+```
+```
+home = /Library/edb/languagepack/v4/Python-3.11/bin
+implementation = CPython
+version_info = 3.11.7.final.0
+virtualenv = 20.25.1
+include-system-site-packages = false
+base-prefix = /Library/edb/languagepack/v4/Python-3.11
+base-exec-prefix = /Library/edb/languagepack/v4/Python-3.11
+base-executable = /Library/edb/languagepack/v4/Python-3.11/bin/python3.11
 ```
 * From the main directory, run `pip3 install -r requirements.txt`. This will install all Python dependencies.
 
