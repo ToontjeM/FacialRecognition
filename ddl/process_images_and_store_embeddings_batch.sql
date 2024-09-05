@@ -43,6 +43,7 @@ image_count = 0
 total_image_processing_time = 0
 total_insertion_time = 0
 
+
 for i in range(0, len(image_paths), batch_size):
     batch_paths = image_paths[i:i+batch_size]
     inputs, valid_paths = load_images_batch(batch_paths, processor, tag)

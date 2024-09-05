@@ -181,5 +181,5 @@ Apple has been working with video device makers to update their support software
 
 For this demo to work you need to add `generate_embeddings_clip_text.sql` to postgres.
 
-Change the connection info on line 47 and beyond inside the file `Application/streamlit_face_reco.py` then run `streamlit run streamlit_face_reco_test.py`. Make sure an image called `logo.png` is in the directory in which the python program is running.```
+Change the connection info on line 47 and beyond inside the file `Application/streamlit_face_reco.py` then run `streamlit run streamlit_face_reco_test.py`. Make sure an image called `logo.png` is in the directory in which the python program is running.
 
