@@ -48,8 +48,6 @@ base-executable = /Library/edb/languagepack/v4/Python-3.11/bin/python3.11
 ```
 * From the main directory, run `pip3 install -r requirements.txt`. This will install all Python dependencies.
 
-*Dirtiest hack ever:* If you have issues with Postgres not finding your modules and you have no idea how to figure this out, just copy your python3.11(!) site-packages directly to `/Library/edb/languagepack/v4/Python-3.11/lib/python3.11/site-packages` and change the ownership to `root:daemon`. Then `select py_list_packages();` will show you all packages. As soon as i find a more "legal" way to do this i will update this README.
-
 * Install pgvector extension from https://github.com/pgvector/pgvector using the `git clone / make / make install` method.
 
 * Create the pgvector extension using `CREATE EXTENSION vector;`
@@ -96,17 +94,17 @@ CREATE TABLE IF NOT EXISTS public.pictures ( id serial, imagepath text, tag text
 ```
 
 * Install the 3 functions inside DDL folder:
-  * Run `generate_embeddings_clip_bytea.sql` to generate embedding from Bytea (Used by the streamlit application to get the input image and return an embedding to search inside the database)
+  * Run `generate_embeddings_clip_bytea.sql`  using `\i ddl/generate_embeddings_clip_bytea.sql` to generate embedding from Bytea (Used by the streamlit application to get the input image and return an embedding to search inside the database).
 
-  * Run `scan_specific_path_and_load.sql`. This is the main function to generate embedding in batch and load data inside pictures table. 
+  * Run `scan_specific_path_and_load.sql`  using `\i ddl/scan_specific_path_and_load.sql`. This is the main function to generate embedding in batch and load data inside pictures table. 
 
-  * Run `process_images_and_store_embeddings_batch.sql` This create the functions to load folder of images, take an input pattern and call scan_specific_path_and_load for each folder in which we have images.
+  * Run `process_images_and_store_embeddings_batch.sql` using `\i ddl/process_images_and_store_embeddings_batch.sql`. This create the functions to load folder of images, take an input pattern and call scan_specific_path_and_load for each folder in which we have images.
 
 ## Load Data
 
 You can load images from a directory directly calling the pl-python function: process_images_and_store_embeddings_batch(source_dir text,tag text,batch integer)
 
-if you have images for instance on: /Users/ton.machielsen/AI/FacialRecognition/dataset/image_group_811
+For example: If you have images in: /Users/ton.machielsen/AI/FacialRecognition/dataset/image_group_811, then run:
 ```
 select process_images_and_store_embeddings_batch(' /Users/ton.machielsen/AI/FacialRecognition/dataset/image_group_811', 'person', 32);
 
@@ -121,7 +119,7 @@ process_images_and_store_embeddings_batch
 
 ### Load All Data
 
-You can load all data using the pl-python function from psql. we load in multiple phases as we did not create autonomous transactions.
+You can load all data using the pl-python function from psql. We load in multiple phases as we did not create autonomous transactions.
 
 ```
 SET work_mem = '512MB';
